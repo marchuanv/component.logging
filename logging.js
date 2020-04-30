@@ -58,7 +58,6 @@ const write = (source, message, data=null) => {
       clearTimeout(timeoutId);
     }
     timeoutId = setTimeout(() => {
-      index = 0;
       const sortedLogs = logs.sort((a, b) => b - a);
       
       const sections = [];
@@ -100,6 +99,7 @@ const write = (source, message, data=null) => {
       };
 
       logs =[];
+      index = 0;
 
     }, 5000);
   },1000);
