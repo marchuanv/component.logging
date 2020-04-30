@@ -95,6 +95,8 @@ const write = (source, message, data=null) => {
       }
     };
 
+    logs =[];
+
   }, 2000);
 };
 
