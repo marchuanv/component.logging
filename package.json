@@ -1,9 +1,9 @@
 {
-    "name": "utils",
+    "name": "logging",
     "username": "marchuanv",
     "version": "1.0.0",
     "description": "",
-    "main": "utils.js",
+    "main": "logging.js",
     "author": "marchuan van der merwe",
     "license": "ISC",
     "scripts": {
