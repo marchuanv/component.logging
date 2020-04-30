@@ -89,7 +89,7 @@ const write = (source, message, data=null) => {
         console.log(`${section.level}-----------------------------------------------------------------------------------------------------------------------`);
         console.log(`${section.level}- ${section.name}`);
         for(const log of section.logs){
-          console.log(`${section.level}  - ${log.message}`);
+          console.log(`${section.level}  - ${log.message}`, log.data);
         };
         console.log("");
       }
