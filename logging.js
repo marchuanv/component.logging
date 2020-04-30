@@ -94,8 +94,8 @@ const write = (source, message, data=null) => {
         console.log("");
       }
     };
-    
-  }, 2000);
+
+  }, 20000);
 };
 
 module.exports = { config, write };
