@@ -51,53 +51,55 @@ const findSection = (name) => {
 };
 
 const write = (source, message, data=null) => {
-  logs.push({date: new Date(), source, message, data: utils.getJSONString(data) });
-  if (timeoutId){
-    clearTimeout(timeoutId);
-  }
-  timeoutId = setTimeout(() => {
+  setTimeout(()=> {
+    logs.push({date: new Date(), source, message, data: utils.getJSONString(data) });
+    if (timeoutId){
+      clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(() => {
 
-    const sortedLogs = logs.sort((a, b) => {
-        a = new Date(a.dateModified);
-        b = new Date(b.dateModified);
-        return a>b ? -1 : a<b ? 1 : 0;
-    });
-    
-    const sections = [];
-    let prevSection;
-    for(const log of sortedLogs){
-      let section = findSection(log.source);
-      if (section){
-        if (!prevSection || (prevSection && prevSection.name !== section.name) ){
-            section = section.clone();
-            section.latestLogDate = log.date;
-            sections.push(section);
+      const sortedLogs = logs.sort((a, b) => {
+          a = new Date(a.dateModified);
+          b = new Date(b.dateModified);
+          return a>b ? -1 : a<b ? 1 : 0;
+      });
+      
+      const sections = [];
+      let prevSection;
+      for(const log of sortedLogs){
+        let section = findSection(log.source);
+        if (section){
+          if (!prevSection || (prevSection && prevSection.name !== section.name) ){
+              section = section.clone();
+              section.latestLogDate = log.date;
+              sections.push(section);
+          }
+          prevSection = section;
         }
-        prevSection = section;
-      }
-    };
+      };
 
-    for(const log of sortedLogs){
-      let section = sections.find(sec => sec.name === log.source && log.date.getTime() <= sec.latestLogDate.getTime() );
-      if (section){
-        section.logs.push(log);
-      }
-    };
- 
-    for(const section of sections){
-      if (section.logs.length > 0){
-        console.log(`${section.level}-----------------------------------------------------------------------------------------------------------------------`);
-        console.log(`${section.level}- ${section.name}`);
-        for(const log of section.logs){
-          console.log(`${section.level}  - ${log.message}`, log.data);
-        };
-        console.log("");
-      }
-    };
+      for(const log of sortedLogs){
+        let section = sections.find(sec => sec.name === log.source && log.date.getTime() <= sec.latestLogDate.getTime() );
+        if (section){
+          section.logs.push(log);
+        }
+      };
+  
+      for(const section of sections){
+        if (section.logs.length > 0){
+          console.log(`${section.level}-----------------------------------------------------------------------------------------------------------------------`);
+          console.log(`${section.level}- ${section.name}`);
+          for(const log of section.logs){
+            console.log(`${section.level}  - ${log.message}`, log.data);
+          };
+          console.log("");
+        }
+      };
 
-    logs =[];
+      logs =[];
 
-  }, 5000);
+    }, 5000);
+  },100);
 };
 
 module.exports = { config, write };
