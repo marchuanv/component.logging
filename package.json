@@ -7,17 +7,14 @@
     "author": "marchuan van der merwe",
     "license": "ISC",
     "scripts": {
-        "preinstall": "npm cache clean --force",
         "test": "node test.js"
     },
     "bugs": {
         "url": "https://github.com/marchuanv/logging/issues"
     },
     "engines": {
-        "engines": {
-            "node": "8.11.3",
-            "npm": "5.6.0"
-        }
+        "node": "8.11.3",
+        "npm": "5.6.0"
     },
     "repository": {
         "type": "git",
