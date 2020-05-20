@@ -20,21 +20,6 @@ function Section({ name, level, parent, child, logs, index }) {
 
 }
 
-const config = (sectionNames) => {
-  let prevSection;
-  for(let i = 0; i < sectionNames.length; i++){
-    if (prevSection){
-      const newSection = new Section({ name: sectionNames[i], level: prevSection.level + " ",  parent: prevSection });
-      prevSection.child = newSection;
-      prevSection = newSection;
-    } else {
-      rootSection = new Section({ name: sectionNames[i] });
-      prevSection = rootSection;
-    }
-  };
-  leafSection = prevSection;
-};
-
 const enumerateSections = (callback, fromRoot = true ) => {
   let section = fromRoot === true? rootSection: leafSection;
   while(section) {
@@ -105,4 +90,20 @@ const write = (source, message, data=null) => {
   },1000);
 };
 
-module.exports = { config, write };
+module.exports = { config: { add: (sectionNames) => {
+  let prevSection;
+  if (Array.isArray(sectionNames) === false){
+    sectionNames = [sectionNames];    
+  }
+  for(let i = 0; i < sectionNames.length; i++){
+    if (prevSection){
+      const newSection = new Section({ name: sectionNames[i], level: prevSection.level + " ",  parent: prevSection });
+      prevSection.child = newSection;
+      prevSection = newSection;
+    } else {
+      rootSection = new Section({ name: sectionNames[i] });
+      prevSection = rootSection;
+    }
+  };
+  leafSection = prevSection;
+}}, write };
