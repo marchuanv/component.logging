@@ -92,17 +92,23 @@ const write = (source, message, data=null) => {
 
 module.exports = { config: { add: (sectionNames) => {
   let prevSection;
+
   if (Array.isArray(sectionNames) === false){
     sectionNames = [sectionNames];    
   }
+
   for(let i = 0; i < sectionNames.length; i++){
-    if (prevSection){
-      const newSection = new Section({ name: sectionNames[i], level: prevSection.level + " ",  parent: prevSection });
+    const name = sectionNames[i];
+    if (!rootSection){
+      rootSection = new Section({ name });
+    }
+    if (!prevSection){
+      prevSection = rootSection;
+    }
+    if (rootSection.name !== name){
+      const newSection = new Section({ name, level: prevSection.level + " ",  parent: prevSection });
       prevSection.child = newSection;
       prevSection = newSection;
-    } else {
-      rootSection = new Section({ name: sectionNames[i] });
-      prevSection = rootSection;
     }
   };
   leafSection = prevSection;
