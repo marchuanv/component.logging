@@ -90,26 +90,19 @@ const write = (source, message, data=null) => {
   },1000);
 };
 
-module.exports = { config: { add: (sectionNames) => {
-  let prevSection;
-
-  if (Array.isArray(sectionNames) === false){
-    sectionNames = [sectionNames];    
+module.exports = { config: { add: (sectionName) => {
+  let childSection;
+  const name = sectionName;
+  if (!rootSection){
+    rootSection = new Section({ name });
   }
-
-  for(let i = 0; i < sectionNames.length; i++){
-    const name = sectionNames[i];
-    if (!rootSection){
-      rootSection = new Section({ name });
-    }
-    if (!prevSection){
-      prevSection = rootSection;
-    }
-    if (rootSection.name !== name){
-      const newSection = new Section({ name, level: prevSection.level + " ",  parent: prevSection });
-      prevSection.child = newSection;
-      prevSection = newSection;
-    }
-  };
-  leafSection = prevSection;
+  if (!childSection){
+    childSection = leafSection || rootSection;
+  }
+  if (rootSection.name !== name){
+    const newSection = new Section({ name, level: childSection.level + " ",  parent: childSection });
+    childSection.child = newSection;
+    childSection = newSection;
+  }
+  leafSection = childSection;
 }}, write };
