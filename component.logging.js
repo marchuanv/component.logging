@@ -1,11 +1,4 @@
-require("component");
 const utils = require("utils");
-const config = require({ moduleName: "component.config", callingModuleName: "component.logging", cache: false});
-
-let rootSection;
-let leafSection;
-let logs = [];
-let timeoutId;
 
 function Section({ name, level, parent, child, logs, index }) {
   this.name = name;
@@ -14,14 +7,21 @@ function Section({ name, level, parent, child, logs, index }) {
   this.child = child;
   this.logs = logs || [];
   this.index = index;
-
   this.clone = () => {
     const clone = new Section(this);
     clone.logs = [];
     return clone;
   };
-
 }
+
+let rootSection;
+let leafSection;
+let logs = [];
+let timeoutId;
+
+const findSection = (name) => {
+  return enumerateSections(( section )=> section.name === name);
+};
 
 const enumerateSections = (callback, fromRoot = true ) => {
   let section = fromRoot === true? rootSection: leafSection;
@@ -34,9 +34,6 @@ const enumerateSections = (callback, fromRoot = true ) => {
   };
 };
 
-const findSection = (name) => {
-  return enumerateSections((section)=> section.name === name);
-};
 let index = 0;
 const write = (source, message, data=null) => {
   setTimeout(()=> {
@@ -93,29 +90,23 @@ const write = (source, message, data=null) => {
   },1000);
 };
 
-
-
-// const config = { 
-//   add: (sectionName) => {
-    
-//   }
-// };
-  
-
-  // let childSection;
-  // const name = sectionName;
-  // if (!rootSection){
-  //   rootSection = new Section({ name });
-  // }
-  // if (!childSection){
-  //   childSection = leafSection || rootSection;
-  // }
-  // if (rootSection.name !== name){
-  //   const newSection = new Section({ name, level: childSection.level + " ",  parent: childSection });
-  //   childSection.child = newSection;
-  //   childSection = newSection;
-  // }
-  // leafSection = childSection;
+require("component");
+require({ moduleName: "component.config", callingModule: module, cache: false }).then((config)=>{
+  let childSection;
+  const name = config.name;
+  if (!rootSection){
+    rootSection = new Section({ name });
+  }
+  if (!childSection){
+    childSection = leafSection || rootSection;
+  }
+  if (rootSection.name !== name){
+    const newSection = new Section({ name, level: childSection.level + " ",  parent: childSection });
+    childSection.child = newSection;
+    childSection = newSection;
+  }
+  leafSection = childSection;
+});
 
 module.exports = {
   write
