@@ -1,4 +1,6 @@
 const utils = require("utils");
+const component = require("component");
+
 let rootSection;
 let leafSection;
 let logs = [];
@@ -96,7 +98,7 @@ const write = (source, message, data=null) => {
 //   }
 // };
 
-const config = utils.requireUncached("component.config");
+const config = component.require("component.config");
 const components = config.dependencies();
   
 
