@@ -90,19 +90,32 @@ const write = (source, message, data=null) => {
   },1000);
 };
 
-module.exports = { config: { add: (sectionName) => {
-  let childSection;
-  const name = sectionName;
-  if (!rootSection){
-    rootSection = new Section({ name });
+const config = { 
+  add: (sectionName) => {
+    
   }
-  if (!childSection){
-    childSection = leafSection || rootSection;
-  }
-  if (rootSection.name !== name){
-    const newSection = new Section({ name, level: childSection.level + " ",  parent: childSection });
-    childSection.child = newSection;
-    childSection = newSection;
-  }
-  leafSection = childSection;
-}}, write };
+};
+
+const componentConfig = require("component.config");
+const components = componentConfig.dependencies();
+  
+
+  // let childSection;
+  // const name = sectionName;
+  // if (!rootSection){
+  //   rootSection = new Section({ name });
+  // }
+  // if (!childSection){
+  //   childSection = leafSection || rootSection;
+  // }
+  // if (rootSection.name !== name){
+  //   const newSection = new Section({ name, level: childSection.level + " ",  parent: childSection });
+  //   childSection.child = newSection;
+  //   childSection = newSection;
+  // }
+  // leafSection = childSection;
+
+module.exports = {
+ 
+  write
+};

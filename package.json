@@ -1,16 +1,18 @@
 {
-    "name": "logging",
+    "name": "component.logging",
     "username": "marchuanv",
     "version": "1.0.0",
     "description": "",
-    "main": "logging.js",
+    "hostname": "localhost",
+    "port": 3000,
+    "main": "component.logging.js",
     "author": "marchuan van der merwe",
     "license": "ISC",
     "scripts": {
         "test": "node test.js"
     },
     "bugs": {
-        "url": "https://github.com/marchuanv/logging/issues"
+        "url": "https://github.com/marchuanv/component.logging/issues"
     },
     "engines": {
         "node": "8.11.3",
@@ -18,10 +20,11 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/marchuanv/logging.git"
+        "url": "https://github.com/marchuanv/component.logging.git"
     },
-    "homepage": "https://github.com/marchuanv/logging#readme",
+    "homepage": "https://github.com/marchuanv/component.logging#readme",
     "dependencies": {
-        "utils": "git+https://github.com/marchuanv/utils.git"
+        "utils": "git+https://github.com/marchuanv/utils.git",
+        "component.config": "git+https://github.com/marchuanv/component.config.git"
     }
 }
