@@ -90,11 +90,11 @@ const write = (source, message, data=null) => {
   },1000);
 };
 
-const config = { 
-  add: (sectionName) => {
+// const config = { 
+//   add: (sectionName) => {
     
-  }
-};
+//   }
+// };
 
 const componentConfig = require("component.config");
 const components = componentConfig.dependencies();
@@ -116,6 +116,5 @@ const components = componentConfig.dependencies();
   // leafSection = childSection;
 
 module.exports = {
- 
   write
 };
