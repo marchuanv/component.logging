@@ -98,7 +98,7 @@ const write = (source, message, data=null) => {
 //   }
 // };
 
-const config = component.require("component.config");
+const config = component.require("component.config", false);
 const components = config.dependencies();
   
 
