@@ -96,8 +96,8 @@ const write = (source, message, data=null) => {
 //   }
 // };
 
-const componentConfig = require("component.config");
-const components = componentConfig.dependencies();
+const config = utils.requireUncached("component.config");
+const components = config.dependencies();
   
 
   // let childSection;
