@@ -1,5 +1,6 @@
+require("component");
 const utils = require("utils");
-const component = require("component");
+const config = require({ moduleName: "component.config", callingModuleName: "component.logging", cache: false});
 
 let rootSection;
 let leafSection;
@@ -92,14 +93,13 @@ const write = (source, message, data=null) => {
   },1000);
 };
 
+
+
 // const config = { 
 //   add: (sectionName) => {
     
 //   }
 // };
-
-const config = component.require("component.config", false);
-const components = config.dependencies();
   
 
   // let childSection;
