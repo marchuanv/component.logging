@@ -25,6 +25,7 @@
     "homepage": "https://github.com/marchuanv/component.logging#readme",
     "dependencies": {
         "utils": "marchuanv/utils",
-        "component": "marchuanv/component"
+        "component": "marchuanv/component",
+        "delegate": "marchuanv/component.delegate"
     }
 }
