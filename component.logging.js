@@ -1,5 +1,4 @@
 const utils = require("utils");
-const component = require("component");
 const delegate = require("component.delegate");
 
 function Section({ name, level, parent, child, logs, index }) {
@@ -92,17 +91,23 @@ const write = (source, message, data=null) => {
   },1000);
 };
 
-delegate.register({ context: "module", name: "register"}, (module) => {
+delegate.register({ context: "module", name: "register" }, (module) => {
+
+    const canRegisterForLogging = module.name !== "" && module.name !== undefined && module.name !== null;
+    if (!canRegisterForLogging){
+      return;
+    }
+
     let childSection;
-    const name = config.name;
+    const sectionName = module.name;
     if (!rootSection){
-      rootSection = new Section({ name });
+      rootSection = new Section({ name: sectionName });
     }
     if (!childSection){
       childSection = leafSection || rootSection;
     }
-    if (rootSection.name !== name){
-      const newSection = new Section({ name, level: childSection.level + " ",  parent: childSection });
+    if (rootSection.name !== sectionName){
+      const newSection = new Section({ name: sectionName, level: childSection.level + " ",  parent: childSection });
       childSection.child = newSection;
       childSection = newSection;
     }
