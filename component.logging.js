@@ -1,5 +1,6 @@
 const utils = require("utils");
-const delegate = require("component.delegate");
+const Component = require("component");
+const component = new Component("component.logging");
 
 function Section({ name, level, parent, child, logs, index }) {
   this.name = name;
@@ -91,7 +92,7 @@ const write = (source, message, data=null) => {
   },1000);
 };
 
-delegate.register({ context: "module", name: "register" }, (module) => {
+component.delegate.register({ name: "acquired" }, (module) => {
 
     const canRegisterForLogging = module.name !== "" && module.name !== undefined && module.name !== null;
     if (!canRegisterForLogging){
