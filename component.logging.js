@@ -1,6 +1,6 @@
 const utils = require("utils");
 const Component = require("component");
-const component = new Component("component.logging");
+const component = new Component({ moduleName: "component", gitUsername: "marchuanv", parentModuleName: "component.logging" });
 
 function Section({ name, level, parent, child, logs, index }) {
   this.name = name;

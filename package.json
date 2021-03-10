@@ -25,7 +25,6 @@
     "homepage": "https://github.com/marchuanv/component.logging#readme",
     "dependencies": {
         "component": "marchuanv/component",
-        "component.request.handler": "github:marchuanv/component.request.handler",
         "utils": "marchuanv/utils"
     }
 }
