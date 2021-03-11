@@ -91,7 +91,7 @@ const write = (source, message, data=null) => {
   },1000);
 };
 
-component.delegate.register({ name: "acquired" }, (module) => {
+component.global.delegate.register({ name: "acquired" }, (module) => {
 
     const canRegisterForLogging = module.name !== "" && module.name !== undefined && module.name !== null;
     if (!canRegisterForLogging){
