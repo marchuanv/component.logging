@@ -91,15 +91,13 @@ const write = (source, message, data=null) => {
   },1000);
 };
 
-component.global.delegate.register({ name: "acquired" }, (module) => {
-
-    const canRegisterForLogging = module.name !== "" && module.name !== undefined && module.name !== null;
+component.events.loaded(({ config }) => {
+    const canRegisterForLogging = config.name !== "" && config.name !== undefined && config.name !== null;
     if (!canRegisterForLogging){
       return;
     }
-
     let childSection;
-    const sectionName = module.name;
+    const sectionName = config.name;
     if (!rootSection){
       rootSection = new Section({ name: sectionName });
     }
