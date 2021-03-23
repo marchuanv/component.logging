@@ -3,8 +3,6 @@
     "username": "marchuanv",
     "version": "1.0.0",
     "description": "",
-    "hostname": "localhost",
-    "port": 3000,
     "main": "component.logging.js",
     "author": "marchuan van der merwe",
     "license": "ISC",
@@ -25,5 +23,6 @@
     "homepage": "https://github.com/marchuanv/component.logging#readme",
     "dependencies": {
         "utils": "marchuanv/utils"
-    }
+    },
+    "component": {}
 }
