@@ -36,9 +36,9 @@ const enumerateSections = (callback, fromRoot = true ) => {
 };
 
 module.exports = {
-  register: ({ moduleName }) => {
+  register: ({ componentName }) => {
     let childSection;
-    const sectionName = moduleName;
+    const sectionName = componentName;
     if (!rootSection){
       rootSection = new Section({ name: sectionName });
     }
